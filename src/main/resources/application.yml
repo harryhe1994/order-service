@@ -39,6 +39,8 @@ springfox:
 #    url: http://localhost:9081
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://eureka-server:8080/eureka/
