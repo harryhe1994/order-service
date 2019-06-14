@@ -1,6 +1,7 @@
 package com.dmall.orderservice.service;
 
 import com.dmall.orderservice.adapter.db.OrderRepository;
+
 import com.dmall.orderservice.adapter.events.EventStreams;
 import com.dmall.orderservice.adapter.inventory.InventoryClient;
 import com.dmall.orderservice.adapter.inventory.Lock;
@@ -34,6 +35,7 @@ public class OrderWriteService {
         orderRepository.save(order);
 
         //TODO: send out order created event
+        eventStreams.outputOrder().send(MessageBuilder.withPayload(OrderEvent.createdEvent(order)).build());
 
         return order;
     }
